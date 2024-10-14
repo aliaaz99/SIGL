@@ -72,7 +72,7 @@ for trial in range(n_trials):
     print("Step2: Sorting the graphs and calculating the pooling")
     X_all, y_all, w_all = graph2XY(graphs_inr, model_SIGL)
     ### train INR using histogram approximation
-    print("Training the INR using histograms")
+    print("Step3: Training the INR using histograms")
     trained_inr = train_graphon(inr_dim_hidden, w0, X_all, y_all, w_all, n_epochs, epoch_show, lr, batch_size)
 
     # Sample the estimated graphon from inr:
