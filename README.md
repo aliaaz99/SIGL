@@ -22,4 +22,6 @@ python Main.py --n_graphon i --offset M
 
 The plots for **Figure 3** are saved in a folder named according to the `--name` argument, located in the `Plots` directory.
 
+As an example `Graphon_1` is included.
+
 You can use `p-Main.py` to reproduce the results for the parametric case explained in Appendix B.
