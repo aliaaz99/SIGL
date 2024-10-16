@@ -14,11 +14,5 @@ For the results shown in **Figure 2(b)** and **Figure 2(c)**, adjust the `--offs
 python Main.py --n_graphon i --offset M
 ```
 
-To get the results in Figure 2(b) and Figure 2(c), increase the `--offset` by desired value $M$ as follows:
-
-```sh
-python Main.py --n_graphon "i" --offset "M"
-```
-
 The plots for **Figure 3** are saved in a folder named according to the `--name` argument, located in the `Plots` directory.
 
