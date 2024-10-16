@@ -2,6 +2,12 @@
 
 ### Reproducing Results
 
+First, you will need to install the requiered packages using `pip` as follows.
+
+```sh
+pip install -r requirements.txt
+```
+
 To regenerate the results shown in **Figure 2(a)** for a specific graphon `i`, use the following command:
 
 ```bash
