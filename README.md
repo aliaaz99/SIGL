@@ -22,3 +22,4 @@ python Main.py --n_graphon i --offset M
 
 The plots for **Figure 3** are saved in a folder named according to the `--name` argument, located in the `Plots` directory.
 
+Other 
