@@ -6,11 +6,13 @@ To regenerate the results shown in **Figure 2(a)** for a specific graphon `i`, u
 
 ```bash
 python Main.py --n_graphon i
+```
 
 For the results shown in **Figure 2(b)** and **Figure 2(c)**, adjust the `--offset` by your desired value `M` as follows:
 
 ```bash
 python Main.py --n_graphon i --offset M
+```
 
 To get the results in Figure 2(b) and Figure 2(c), increase the `--offset` by desired value $M$ as follows:
 
