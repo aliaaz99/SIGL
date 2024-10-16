@@ -10,7 +10,6 @@ from einops import rearrange
 import random
 import ot
 import matplotlib as mpl
-import networkx as nx
 import matplotlib.pyplot as plt
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
