@@ -3,7 +3,8 @@
 This repository contains all the necessary code for "Scalable Implicit Graphon Learning."
 
 SIGL is a scalable method that combines implicit neural representations (INRs) and graph neural networks (GNNs) to estimate a graphon from observed graphs. 
-[Overview_latex.pdf](https://github.com/user-attachments/files/18805343/Overview_latex.pdf)
+![Overview_latex](https://github.com/user-attachments/assets/ace191e8-28d1-4b64-8055-abb085fd806e)
+
 
 ### Reproducing Results
 
