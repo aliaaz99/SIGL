@@ -28,6 +28,4 @@ You can use `p-Main.py` to reproduce the results for the parametric case explain
 
 ### Learning graphon of an arbitrary set of graphs
 
-In order to learn the graphon for a set of graphs, follow these steps:
-
-First, store the adjacency matrix of your graphs in a file called 
+To learn the graphon from a given set of graphs, save a list of adjacency matrices as a `.pkl` file and specify its directory using the `--Adjs_dir` parameter in the input. Since the true graphon is not available in this case, we cannot directly evaluate the reconstruction. However, the estimated graphon, along with the latent variables of the nodes and the sorted graph, will be plotted and saved as `output.jpg`.
