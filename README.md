@@ -25,3 +25,9 @@ The plots for **Figure 3** are saved in a folder named according to the `--name`
 As an example `Graphon_1` is included.
 
 You can use `p-Main.py` to reproduce the results for the parametric case explained in Appendix B.
+
+### Learning graphon of an arbitrary set of graphs
+
+In order to learn the graphon for a set of graphs, follow these steps:
+
+First, store the adjacency matrix of your graphs in a file called 
