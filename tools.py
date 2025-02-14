@@ -155,7 +155,7 @@ def nx2torch(adjacency_matrix):
     adjacency_matrix = torch.tensor(adjacency_matrix, dtype=torch.float)
     edge_index = torch.nonzero(adjacency_matrix, as_tuple=False).t().contiguous()
     edge_value = adjacency_matrix.reshape(-1)
-    x = torch.randn(adjacency_matrix.size(0), 1)
+    x = torch.randn(adjacency_matrix.size(0), 1) # Random node features
     data = Data(x=x, edge_index=edge_index, y=edge_value).to(device)
     return data
 
@@ -322,6 +322,8 @@ def simulate_graphs(w: np.ndarray, seed_gsize: int=123, seed_edge:int=123, num_g
         graph = w[node_locs, :]
         graph = graph[:, node_locs]
         noise = np.random.rand(graph.shape[0], graph.shape[1])
+        noise = np.triu(noise)
+        noise = noise + noise.T - np.diag(np.diag(noise))   
         graph -= noise
         np.fill_diagonal(graph, 0)
         graphs.append((graph > 0).astype('float'))
@@ -412,7 +414,7 @@ def get_graphon(Res, model):
     np.fill_diagonal(graphon, 0)
     return graphon
 
-def plot_smaples(true_graphon, predictions_graphon, name, model_SIGL, offset):
+def plot_smaples_syn(true_graphon, predictions_graphon, name, model_SIGL, offset):
         # plot the true graphon and the predicted graphon
         plt.figure(figsize=(4, 4))
         mpl.rcParams['font.family'] = 'serif'
@@ -463,3 +465,42 @@ def plot_smaples(true_graphon, predictions_graphon, name, model_SIGL, offset):
         plt.title(r'(Sorted) histogram approximation', fontsize=18)
         plt.tight_layout()
         plt.savefig('Plots/' + name + "/Histogram_app.jpg")
+
+
+
+def plot_smaples_real(sample_graph, predictions_graphon, name, model_ISGL):
+        model_ISGL.eval()
+        data_i = nx2torch(sample_graph)
+        _, coords = model_ISGL(data_i)
+        perm = torch.argsort(coords.squeeze(-1))
+        perm = perm.cpu().numpy()  # Convert torch permutation to numpy array
+        true_graph_sorted = sample_graph[perm,:][:, perm]
+        coords = coords.cpu().detach().numpy()
+
+        # plot the true graph and sorted graph based on the coordinates
+        plt.figure(figsize=(15, 5))
+        mpl.rcParams['font.family'] = 'serif'
+        plt.rc('text', usetex=True)
+        plt.rc('text.latex', preamble=r'\usepackage{amsmath}')
+
+        plt.subplot(1, 4, 1)
+        plt.spy(sample_graph, markersize=1)
+        plt.title(r'True graph', fontsize=18)
+
+        plt.subplot(1, 4, 2)
+        plt.scatter([np.sum(sample_graph[:,j]) for j in range(sample_graph.shape[0])], coords)
+        plt.xlabel(r'Node degree', fontsize=16)
+        plt.ylabel(r'$\hat{\boldsymbol{\eta}}$', fontsize=16)
+        plt.title(r'Estimated latent variables', fontsize=18)
+
+        plt.subplot(1, 4, 3)
+        plt.spy(true_graph_sorted, markersize=1)
+        plt.title(r'True graph sorted', fontsize=18)
+
+        plt.subplot(1, 4, 4)
+        plt.imshow(predictions_graphon, cmap='viridis')
+        plt.axis('off')
+        plt.title(r'Predicted graphon $f_{\theta^*}(x,y)$', fontsize=18)
+
+        plt.tight_layout()
+        plt.savefig('Plots/'+ name + "/output.jpg", dpi=300)
